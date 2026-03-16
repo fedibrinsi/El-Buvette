@@ -1,0 +1,24 @@
+# Build stage
+FROM node:18-alpine AS build
+WORKDIR /app
+
+# Copy only package files first (for caching)
+COPY cyber-chase-challenge/package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy the rest of the source code
+COPY cyber-chase-challenge/. .
+
+# Fix execute permissions for local binaries
+RUN chmod -R +x node_modules/.bin
+
+# Build the frontend
+RUN npm run build
+
+# Serve stage
+FROM nginx:1.25-alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
