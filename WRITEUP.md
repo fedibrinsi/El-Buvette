@@ -216,6 +216,6 @@ const results = await sql`
 ---
 
 ## Congratulations!
-You've successfully exploited a SQL injection vulnerability! Remember: this knowledge should only be used for authorized security testing and CTF challenges. 🎉
+You've successfully exploited a SQL injection vulnerability! Remember: this knowledge should only be used for authorized security testing and CTF challenges.
 
 **Flag:** `CyberQuest{un10n_1nj3ct10n_m4st3r}`
